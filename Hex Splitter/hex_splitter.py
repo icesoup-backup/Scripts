@@ -13,6 +13,7 @@ def inputNSplit(filename):
         return chunks
 
 def toCArray(hexList):
+    count = 0
     f = open("output.txt","w")
     f.write(f"uint8_t {arrayName}[{arrayLength}][8] = " + "{\n")
     f.close()
@@ -21,10 +22,10 @@ def toCArray(hexList):
         hexArray = str(hexArray).replace("[", "{")
         hexArray = hexArray.replace("]", "}")
         hexArray = hexArray.replace("'", "")
-
         with open("output.txt","a") as f:
-            f.write("  " + hexArray + ",\n")
+            f.write("  " + hexArray + f", //{count:02}\n")
             f.close()
+        count += 1
 
     f = open("output.txt","a")
     f.write("};\n")
